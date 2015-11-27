@@ -1,0 +1,11 @@
+{
+  "name": "att-kandy-tutorial",
+  "version": "1.0.0",
+  "description": "A tutorial and example application of using AT&T Enhanced WebRTC with Kandy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kandy Team",
+  "license": "ISC"
+}
