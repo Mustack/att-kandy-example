@@ -4,12 +4,14 @@
   "description": "A tutorial and example application of using AT&T Enhanced WebRTC with Kandy.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node ./node_modules/eslint/bin/eslint.js ."
   },
   "author": "Kandy Team",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "jssha": "^2.0.2",
+    "lodash": "^3.10.1"
   }
 }
