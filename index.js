@@ -1,29 +1,30 @@
 'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
-
-var promiseHandler = require('./lib/promiseHandler');
-var userService = require('./lib/userService');
-var authService = require('./lib/authService');
 var errors = require('./lib/errors');
+var api = require('./lib/api');
+var staticDev = require('./lib/static-dev');
+var staticProd = require('./lib/static-prod');
+
+var isDeveloping = process.env.NODE_ENV !== 'production';
 
 var app = express();
 
 // Add a JSON body parser middleware.
 app.use(bodyParser.json());
 
-// Serve our public folder statically.
-app.use(express.static('public'));
+// Add the static routes
+if (isDeveloping) {
+    console.log('Using dev static server');
+    app.use(staticDev);
+} else {
+    app.use(staticProd);
+}
 
-// Let's define our REST users routes
+// Add the API routes.
+app.use(api);
 
-app.route('/users')
-.post(promiseHandler(req => userService.createUser(req.body)));
-
-app.route('/tokens')
-.post(promiseHandler(req => authService.createTokens(req.user)));
-
-
+// Errors middleware.
 app.use(errors.middleware);
 
 // Start the application.
