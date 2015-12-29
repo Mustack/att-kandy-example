@@ -13,6 +13,9 @@ var app = express();
 // Add a JSON body parser middleware.
 app.use(bodyParser.json());
 
+// Add the API routes.
+app.use('/api', api);
+
 // Add the static routes
 if (isDeveloping) {
     console.log('Using dev static server');
@@ -20,9 +23,6 @@ if (isDeveloping) {
 } else {
     app.use(staticProd);
 }
-
-// Add the API routes.
-app.use(api);
 
 // Errors middleware.
 app.use(errors.middleware);

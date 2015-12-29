@@ -1,5 +1,5 @@
 'use strict';
-
+var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -25,15 +25,17 @@ module.exports = {
     ],
     module: {
         loaders: [
-            {
-                test: /\.js?$/,
-                include: path.join(__dirname, 'public'),
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.json?$/,
-                loader: 'json'
-            }
+            // CSS loader with CSS Modules support (see https://github.com/css-modules/webpack-demo).
+            { test: /\.css$/, loaders: [
+                'style',
+                'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                'postcss'
+            ]},
+
+            // ES6 loader using Babel
+            { test: /\.js?$/, include: path.join(__dirname, 'public'), loader: 'babel-loader' }
         ]
-    }
+    },
+
+    postcss: [ autoprefixer({ browsers: ['last 2 versions'] }) ]
 };

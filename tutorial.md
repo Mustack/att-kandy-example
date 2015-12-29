@@ -2,6 +2,10 @@
 
 In this tutorial we will explore how to build an application that uses AT&T Enhanced WebRTC for calls and Kandy for collaborative features such as IM and Co-Browsing.
 
+## Pre-requisit
+
+-
+
 ## Developer Hosted Server
 
 To host our application and provide user management and authentication we will need a server component. We will be using Node.js with express as our backend technology stack along with AT&T and Kandy APIs for user authentication.
@@ -37,7 +41,7 @@ This is pretty standard boilerplate so far.
 
 ## Users
 
-Our application will need users, and to hold our users we will need to store them somewhere. For this we will use an in-memory database that is backed by simple JSON files. This will allow us to focus on our application logic.
+Our application will need users, and to hold our users we will need to store them somewhere. For this we will use an in-mpemory database that is backed by simple JSON files. This will allow us to focus on our application logic.
 
 Let's create a _database.js_ file which will hold all our application state.
 
@@ -160,6 +164,8 @@ module.exports = {
 
 ## Web Application
 
+1. Register
+1. Login
 1. Calls
 1. IM
 1. Co-Browsing

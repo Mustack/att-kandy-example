@@ -1,0 +1,17 @@
+.loginForm {
+    flex: none;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding:20px;
+}
+
+.buttonContainer {
+    margin-top:20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    flex: 1;
+}
