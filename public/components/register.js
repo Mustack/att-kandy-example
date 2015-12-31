@@ -1,20 +1,42 @@
 import React from 'react';
-import TextField from 'material-ui/lib/text-field';
-import RaisedButton from 'material-ui/lib/raised-button';
-import AutoComplete from 'material-ui/lib/auto-complete';
+import {TextField, RaisedButton, Paper} from 'material-ui';
+import styles from './register.css';
+import {dispatch} from '../dispatcher';
 
+/**
+ * Component to display a registration form.
+ */
 export default React.createClass({
-    render() {
+    render () {
         return (
-            <form>
-                <TextField hintText="e.g. James" floatingLabelText="First Name" />
-                <TextField hintText="e.g. Smith" floatingLabelText="Last Name" />
-                <TextField hintText="e.g. james.smith@email.com" floatingLabelText="Email"/>
-                <AutoComplete floatingLabelText = "Country" dataSource = {["12345", "23456", "34567"]} />
-                <TextField hintText="e.g. cat123" floatingLabelText="Password" type="password" />
-                <RaisedButton label="Login" primary={true}/>
-                
-            </form>
+            <Paper className={styles.registerForm}>
+                <div>Please enter your information.</div>
+                <TextField hintText="e.g. James" floatingLabelText="First Name"
+                    onChange={this.createFieldHandler('firstName')}/>
+                <TextField hintText="e.g. Smith" floatingLabelText="Last Name"
+                    onChange={this.createFieldHandler('lastName')}/>
+                <TextField hintText="e.g. james.smith@email.com" floatingLabelText="Email"
+                    onChange={this.createFieldHandler('email')}/>
+                <TextField hintText="e.g. cat123" floatingLabelText="Password" type="password"
+                    onChange={this.createFieldHandler('password')}/>
+                <div className={styles.buttonContainer}>
+                    <RaisedButton label="Done" primary={true} onClick={this.register}/>
+                </div>
+            </Paper>
         );
+    },
+
+    register() {
+        // Since the state has the full payload, just use it as is.
+        dispatch('register', this.state);
+    },
+
+    /**
+     * Creates a change handler for a field name and associates the value to the key of the same name.
+     * @param  {String} fieldName Name of the field to create a handler for.
+     * @return {Function} Event handler function for the specified field.
+     */
+    createFieldHandler(fieldName) {
+        return event => this.setState({[fieldName]: event.target.value});
     }
 });

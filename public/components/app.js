@@ -9,7 +9,7 @@ export default React.createClass({
                 <div className={styles.container}>
                     {this.props.children}
                 </div>
-                <footer className={styles.footer}>Powered by AT&amp; and Kandy.</footer>
+                <footer className={styles.footer}>Powered by AT&amp;T and Kandy.</footer>
             </div>
         );
     }

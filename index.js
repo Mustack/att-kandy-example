@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 var bodyParser = require('body-parser');
+var auth = require('./lib/auth');
 var errors = require('./lib/errors');
 var api = require('./lib/api');
 var staticDev = require('./lib/static-dev');
@@ -12,6 +13,9 @@ var app = express();
 
 // Add a JSON body parser middleware.
 app.use(bodyParser.json());
+
+// Add the authentication middleware.
+app.use(auth.middleware);
 
 // Add the API routes.
 app.use('/api', api);

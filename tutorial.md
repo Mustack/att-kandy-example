@@ -2,7 +2,9 @@
 
 In this tutorial we will explore how to build an application that uses AT&T Enhanced WebRTC for calls and Kandy for collaborative features such as IM and Co-Browsing.
 
-## Pre-requisit
+An example application based on this tutorial is available [here](https://github.com/Kandy-IO/att-kandy-example). The application example is based on the tutorial but contains some additional details that are omitted from the tutorial for brevity.
+
+## Pre-requisites
 
 -
 
@@ -28,8 +30,8 @@ var app = express();
 // Add a JSON body parser middleware..
 app.use(bodyParser.json());
 
-// Serve our public folder statically.
-app.use(express.static('public'));
+// Serve our build folder statically.
+app.use(express.static('dist'));
 
 // Start the application.
 var server = app.listen(process.env.PORT || 8080, () => {
@@ -163,6 +165,11 @@ module.exports = {
 
 
 ## Web Application
+
+We will follow the same principles for the front-end part of our application as the back-end.
+
+* We will be using ES6, [React](https://facebook.github.io/react/) with JSX and [CSS Modules](https://github.com/css-modules/css-modules) all backed by [webpack](https://webpack.github.io/) for module bundling and management.
+* Althought the Kandy team highly recommends [Redux](http://redux.js.org/) as a Flux implementation.
 
 1. Register
 1. Login
