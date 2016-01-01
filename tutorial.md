@@ -77,7 +77,6 @@ db.domains.ensureIndex({fieldName: 'username', unique: true });
 module.exports = db;
 ```
 
-
 ### API Keys
 
 Now, if we're going to be using AT&T and Kandy we need to have access to both APIs. So head on over to both [developer.att.com](https://developer.att.com) and [developer.kandy.io](https://developer.kandy.io) and create an account and a project for each.
@@ -166,10 +165,91 @@ module.exports = {
 
 ## Web Application
 
-We will follow the same principles for the front-end part of our application as the back-end.
+Now that we have a back-end application server we will need to build the front end to expose all of this functionality to our users. The [demo application](https://github.com/Kandy-IO/att-kandy-example) provided with this tutorial includes this front end. We will go through the broad steps of how this was built and how to extend it with further capabilities.
 
+Similar to the back-end we use modern tools to help us deliver a great experience.
 * We will be using ES6, [React](https://facebook.github.io/react/) with JSX and [CSS Modules](https://github.com/css-modules/css-modules) all backed by [webpack](https://webpack.github.io/) for module bundling and management.
-* Althought the Kandy team highly recommends [Redux](http://redux.js.org/) as a Flux implementation.
+* For an easy modern look we will be using the [material-ui](http://www.material-ui.com/) React components.
+* The demo application includes a development mode that allows for (hot module replacement)[https://webpack.github.io/docs/hot-module-replacement.html] which is a must for quick iterations while developing.
+
+
+
+### Application State
+
+Although the Kandy team highly recommends [Redux](http://redux.js.org/) as a Flux implementation in this demo we have used a more lightweight Flux approach by using an event emitter as a dispatcher and [Baobab](https://github.com/Yomguithereal/baobab) as a store for the application state.
+
+Here is our simple dispatcher:
+_public/dispatcher.js_
+```javascript
+import Emitter from 'emmett';
+var emitter = new Emitter();
+
+export function dispatch(action, payload ){
+    emitter.emit(action, payload);
+}
+
+export function register(action, actionHandler) {
+    emitter.on(action, actionHandler);
+}
+```
+
+Our state will be held fully into one Baobab tree. Here is how we initialize our state:
+_public/state.js_
+```javascript
+import Baobab from 'baobab';
+import ReactAddons from 'react/addons';
+
+export default new Baobab({
+    user: {
+        loggedIn: Baobab.dynamicNode(
+            ['kandy', 'loggedIn'],
+            ['att', 'loggedIn'],
+            (kandyLoggedIn, attLoggedIn) => kandyLoggedIn && attLoggedIn
+        ),
+        progress: false
+    },
+    kandy: {
+        loggedIn: false
+    },
+    att: {
+        loggedIn: false
+    }
+}, {
+    shiftReferences: true,
+    mixins: [ReactAddons.addons.PureRenderMixin]
+});
+```
+### Application Components
+
+The demo application is entirely built of React components. React-Router is used to associate specific React components to URL routes.
+
+Here is how our demo application defines it's routes:
+_public/index.js_
+```javascript
+// Render the application
+ReactDOM.render(
+    <Router history={history}>
+        <Route path="/" component={App}>
+            <IndexRedirect to="login"/>
+            <Route path="login" component={Login} onEnter={requireNoAuth}/>
+            <Route path="register" component={Register} onEnter={requireNoAuth}/>
+            <Route path="dialer" component={Dialer} onEnter={requireAuth}/>
+            <Route path="conversation" component={Conversation} onEnter={requireAuth}/>
+            <Redirect path="*" to="login"/>
+        </Route>
+    </Router>
+    , document.getElementById('root'));
+```
+
+You can think of these components as Views or Smart Components because they rely on the application state and the dispatcher directly.
+
+Other components that are standalone don't need the state or dispatcher and will build their internal state from properties and will communicate their outputs via callbacks.
+
+
+
+### Action Handlers
+
+
 
 1. Register
 1. Login
