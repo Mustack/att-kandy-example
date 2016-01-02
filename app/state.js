@@ -11,7 +11,8 @@ export default new Baobab({
         progress: false
     },
     kandy: {
-        loggedIn: false
+        loggedIn: false,
+        initialized: false
     },
     att: {
         loggedIn: false

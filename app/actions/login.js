@@ -5,6 +5,12 @@ import state from '../state';
 import {progress, checkHTTPStatus, handleError} from '../helpers';
 import history from '../history';
 
+/**
+ * Login action handler. Will
+ * @param  {[type]} {username [description]
+ * @param  {[type]} password} [description]
+ * @return {[type]}           [description]
+ */
 export function login({username, password}) {
     // Store the username and password of the current user.
     state.select('user').merge({username, password});
@@ -24,8 +30,8 @@ export function login({username, password}) {
         ]);
     })
     .then(() => {
-        // Once login is successful, navigate to the dialer.
-        history.push('/dialer');
+        // Once login is successful, navigate to the dashboard.
+        history.push('/dashboard');
     })
     .catch(handleError));
 }

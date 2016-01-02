@@ -1,8 +1,22 @@
 import kandy from 'kandy';
 import state from '../state';
 
+
 var kandyCursor = state.select('kandy');
 var conversations = state.select('conversations');
+
+function initializeKandy() {
+    if(!kandyCursor.get('initialized')) {
+        // Mandatory one-time setup of kandy.
+        kandy.setup();
+
+        // Register for notifications.
+        kandy.on('message', onIncomingMessage);
+
+        // Mark kandy as initialized.
+        kandyCursor.set('initialized', true);
+    }
+}
 
 function addMessage(recipient, message){
     // Make sure the conversation exists for this recipient.
@@ -16,7 +30,6 @@ function addMessage(recipient, message){
     // Add the message
     conversation.push('messages', message);
 }
-
 
 function onIncomingMessage(envelope) {
     addMessage(envelope.sender.full_user_id, {
@@ -44,15 +57,10 @@ function onOutgoingMessageError(recipient, text, error) {
 }
 
 export function login({userAccessToken}){
+    initializeKandy();
 
     // Store the user access token.
     kandyCursor.set('token', userAccessToken);
-
-    // Mandatory setup of kandy.
-    kandy.setup();
-
-    // Register for notifications.
-    kandy.on('message', onIncomingMessage);
 
     return new Promise((resolve, reject) => {
         kandy.loginSSO(userAccessToken,
@@ -64,6 +72,16 @@ export function login({userAccessToken}){
                 kandyCursor.set('loggedIn', false);
                 reject(new Error('Failed to login to Kandy.'));
             });
+    });
+}
+
+export function logout() {
+    return new Promise((resolve) => {
+        kandy.logout(resolve);
+    })
+    .then(() => {
+        // Mark kandy as logged out.
+        kandyCursor.set('loggedIn', false);
     });
 }
 

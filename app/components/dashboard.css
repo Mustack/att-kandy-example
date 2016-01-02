@@ -1,0 +1,11 @@
+.dashboard {
+    flex: none;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding:20px;
+}
+
+.title {
+    font-size: 30px;
+}

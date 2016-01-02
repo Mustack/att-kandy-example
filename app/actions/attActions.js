@@ -16,6 +16,10 @@ export function login(userId, token) {
     return associateAccessToken(userId, token).then(phone.login.bind(phone, {token}));
 }
 
+export function logout() {
+    phone.logout();
+}
+
 export function makeCall({recipient, videoOn, localMediaId, remoteMediaId}) {
     phone.dial({
         destination: recipient,

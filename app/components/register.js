@@ -11,6 +11,8 @@ export default React.createClass({
         return (
             <Paper className={styles.registerForm}>
                 <div>Please enter your information.</div>
+                <TextField hintText="e.g. james.smith" floatingLabelText="Username"
+                    onChange={this.createFieldHandler('username')}/>
                 <TextField hintText="e.g. James" floatingLabelText="First Name"
                     onChange={this.createFieldHandler('firstName')}/>
                 <TextField hintText="e.g. Smith" floatingLabelText="Last Name"

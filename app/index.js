@@ -8,8 +8,7 @@ import state from './state';
 import App from './components/app';
 import Login from './components/login';
 import Register from './components/register';
-import Dialer from './components/dialer';
-import Conversation from './components/conversation';
+import Dashboard from './components/dashboard';
 
 // Add .finally to promises
 import 'promise.prototype.finally';
@@ -51,8 +50,7 @@ ReactDOM.render(
             <IndexRedirect to="login"/>
             <Route path="login" component={Login} onEnter={requireNoAuth}/>
             <Route path="register" component={Register} onEnter={requireNoAuth}/>
-            <Route path="dialer" component={Dialer} onEnter={requireAuth}/>
-            <Route path="conversation/:username" component={Conversation} onEnter={requireAuth}/>
+            <Route path="dashboard" component={Dashboard} onEnter={requireAuth}/>
             <Redirect path="*" to="login"/>
         </Route>
     </Router>
