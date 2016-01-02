@@ -1,5 +1,7 @@
 'use strict';
+var fs = require('fs');
 var express = require('express');
+var https = require('https');
 var bodyParser = require('body-parser');
 var auth = require('./lib/auth');
 var errors = require('./lib/errors');
@@ -30,7 +32,13 @@ if (isDeveloping) {
 // Errors middleware.
 app.use(errors.middleware);
 
+// Create the server with SSL
+var privateKey  = fs.readFileSync('localhost.key', 'utf8');
+var certificate = fs.readFileSync('localhost.cert', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
+
 // Start the application.
-var server = app.listen(process.env.PORT || 8080, () => {
-    console.log(`Server listening on port ${server.address().port}`);
+httpsServer.listen(process.env.PORT || 8080, () => {
+    console.log(`Server listening on port ${httpsServer.address().port}`);
 });
