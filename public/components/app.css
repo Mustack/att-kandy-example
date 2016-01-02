@@ -5,7 +5,9 @@
 }
 
 .header {
-    background-color: green;
+    background-color: #ff4081;
+    font-size: 40px;
+    color: white;
 }
 
 .container {
@@ -14,9 +16,9 @@
     justify-content: center;
 
     flex: 1;
-    background-color: blue;
 }
 
 .footer {
-    background-color:red;
+    background-color: #ff4081;
+    color: white;
 }
