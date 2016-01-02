@@ -17,7 +17,9 @@ export function login({username, password}) {
 
     // Make a POST to our backend server to fetch tokens
     return progress(window.fetch('/api/tokens', {
+        method: 'GET',
         headers: {
+            'Content-Type': 'application/json',
             Authorization: basic(username, password)
         }
     })

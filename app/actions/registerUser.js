@@ -7,10 +7,17 @@ import history from '../history';
  */
 export function registerUser(userInformation) {
 
+    // We need the country code but the UI doesn't allow us to specify it yet.
+    var newUser = userInformation;
+    newUser.countryCode = 'US';
+
     // Make a POST to our backend server to create an new user.
     progress(window.fetch('/api/users', {
         method: 'POST',
-        body: JSON.stringify(userInformation)
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
     })
     .then(checkHTTPStatus)
     .then(() => {
