@@ -22,7 +22,6 @@ app.use('/api', api);
 
 // Add the static routes
 if (isDeveloping) {
-    console.log('Using dev static server');
     app.use(staticDev);
 } else {
     app.use(staticProd);

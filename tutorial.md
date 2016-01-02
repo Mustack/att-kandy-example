@@ -43,7 +43,7 @@ This is pretty standard boilerplate so far.
 
 ## Users
 
-Our application will need users, and to hold our users we will need to store them somewhere. For this we will use an in-mpemory database that is backed by simple JSON files. This will allow us to focus on our application logic.
+Our application will need users, and to hold our users we will need to store them somewhere. For this we will use an in-memory database that is backed by simple JSON files. This will allow us to focus on our application logic.
 
 Let's create a _database.js_ file which will hold all our application state.
 
@@ -142,7 +142,7 @@ Kandy uses a custom authentication that is very similar to OAuth. We need to cre
 
 We'll follow the same pattern on the Kandy side of things. We'll create a _kandyService.js_ file and add to it the functions we need to get this token.
 
-_lib/kandyService.js_
+_lib/services/kandy.js_
 ```javascript
 module.exports = {
     getUserAccessToken(username) {
@@ -171,7 +171,6 @@ Similar to the back-end we use modern tools to help us deliver a great experienc
 * We will be using ES6, [React](https://facebook.github.io/react/) with JSX and [CSS Modules](https://github.com/css-modules/css-modules) all backed by [webpack](https://webpack.github.io/) for module bundling and management.
 * For an easy modern look we will be using the [material-ui](http://www.material-ui.com/) React components.
 * The demo application includes a development mode that allows for (hot module replacement)[https://webpack.github.io/docs/hot-module-replacement.html] which is a must for quick iterations while developing.
-
 
 
 ### Application State
@@ -245,9 +244,39 @@ You can think of these components as Views or Smart Components because they rely
 
 Other components that are standalone don't need the state or dispatcher and will build their internal state from properties and will communicate their outputs via callbacks.
 
-
-
 ### Action Handlers
+
+Action handlers are where we add the business logic of our application. They will handle incoming user inputs from the UI and change the application's state as necessary.
+
+Note that the UI will be updated based on update notifications it receives from the state.
+
+Here is an example action handler for the login to kandy action:
+_public/actions/kandyActions.js_
+```javascript
+export function login({userAccessToken}){
+
+    // Store the user access token.
+    kandyCursor.set('token', userAccessToken);
+
+    // Mandatory setup of kandy.
+    kandy.setup();
+
+    // Register for notifications.
+    kandy.on('message', onIncomingMessage);
+
+    return new Promise((resolve, reject) => {
+        kandy.loginSSO(userAccessToken,
+            function onSuccess() {
+                kandyCursor.set('loggedIn', true);
+                resolve();
+            },
+            function onFailure() {
+                kandyCursor.set('loggedIn', false);
+                reject(new Error('Failed to login to Kandy.'));
+            });
+    });
+}
+```
 
 
 

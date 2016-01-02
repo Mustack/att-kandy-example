@@ -15,7 +15,9 @@ export default new Baobab({
     },
     att: {
         loggedIn: false
-    }
+    },
+    conversations: [],
+    errors: []
 }, {
     shiftReferences: true,
     mixins: [ReactAddons.addons.PureRenderMixin]

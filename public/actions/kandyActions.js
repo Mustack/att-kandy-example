@@ -2,29 +2,48 @@ import kandy from 'kandy';
 import state from '../state';
 
 var kandyCursor = state.select('kandy');
-var messagesCursor = kandyCursor.select('messages');
+var conversations = state.select('conversations');
+
+function addMessage(recipient, message){
+    // Make sure the conversation exists for this recipient.
+    if (!conversations.exists({recipient})) {
+        conversations.push({recipient, messages: []});
+    }
+
+    // Select the correct conversation matching the recipient.
+    var conversation = conversations.select({recipient});
+
+    // Add the message
+    conversation.push('messages', message);
+}
+
 
 function onIncomingMessage(envelope) {
-    var sender = envelope.sender.full_user_id;
-    var message = envelope.message.text;
-    var timestamp = envelope.timestamp;
-
-    messagesCursor.push(sender, {message, timestamp, incoming: true});
+    addMessage(envelope.sender.full_user_id, {
+        text: envelope.message.text,
+        timestamp: envelope.timestamp,
+        isIncoming: true
+    });
 }
 
 function onOutgoingMessage(envelope) {
-    var recipient = envelope.recipient;
-    var message = envelope.message.text;
-    var timestamp = envelope.timestamp;
-
-    messagesCursor.push(recipient, {message, timestamp, incoming: false});
+    addMessage(envelope.recipient, {
+        text: envelope.message.text,
+        timestamp: envelope.timestamp,
+        isIncoming: false
+    });
 }
 
-function onOutgoingMessageError(recipient, message, error) {
-    messagesCursor.push(recipient, {message, timestamp: Date.now(), incoming: false, error});
+function onOutgoingMessageError(recipient, text, error) {
+    addMessage(recipient, {
+        text,
+        isIncoming: false,
+        timestamp: Date.now(),
+        error
+    });
 }
 
-export function initialize({userAccessToken}){
+export function login({userAccessToken}){
 
     // Store the user access token.
     kandyCursor.set('token', userAccessToken);

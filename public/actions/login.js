@@ -1,14 +1,12 @@
-import {initialize as initializeKandy} from './kandyActions';
-import {initialize as initializeAtt} from './attActions';
+import {login as kandyLogin} from './kandyActions';
+import {login as attLogin} from './attActions';
 import basic from 'basic-authorization-header';
 import state from '../state';
 import {progress, checkHTTPStatus, handleError} from '../helpers';
 import history from '../history';
 
-
-
 export function login({username, password}) {
-
+    // Store the username and password of the current user.
     state.select('user').merge({username, password});
 
     // Make a POST to our backend server to fetch tokens
@@ -20,10 +18,10 @@ export function login({username, password}) {
     .then(checkHTTPStatus)
     .then(res => res.json())
     .then(tokens => {
-        var kandyInit = initializeKandy(tokens.kandy);
-        var attInit = initializeAtt(tokens.att);
-
-        return Promise.all([kandyInit, attInit]);
+        return Promise.all([
+            kandyLogin(tokens.kandy),
+            attLogin(tokens.att)
+        ]);
     })
     .then(() => {
         // Once login is successful, navigate to the dialer.

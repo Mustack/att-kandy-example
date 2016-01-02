@@ -15,6 +15,10 @@ module.exports = {
         filename: '[name].js',
         publicPath: '/'
     },
+    externals: {
+        kandy: 'kandy',
+        ATT: 'ATT'
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'public/index.tpl.html'),

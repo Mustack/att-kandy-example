@@ -48,7 +48,7 @@ ReactDOM.render(
             <Route path="login" component={Login} onEnter={requireNoAuth}/>
             <Route path="register" component={Register} onEnter={requireNoAuth}/>
             <Route path="dialer" component={Dialer} onEnter={requireAuth}/>
-            <Route path="conversation" component={Conversation} onEnter={requireAuth}/>
+            <Route path="conversation/:username" component={Conversation} onEnter={requireAuth}/>
             <Redirect path="*" to="login"/>
         </Route>
     </Router>
