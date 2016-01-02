@@ -55,7 +55,7 @@ function onOutgoingMessageError(recipient, text, error) {
     });
 }
 
-export function login({userAccessToken}){
+export function login(userAccessToken){
     initializeKandy();
 
     // Store the user access token.

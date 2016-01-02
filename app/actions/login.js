@@ -28,7 +28,7 @@ export function login({username, password}) {
     .then(tokens => {
         return Promise.all([
             kandyLogin(tokens.kandy),
-            attLogin(tokens.att)
+            attLogin(username, tokens.att.access_token)
         ]);
     })
     .then(() => {

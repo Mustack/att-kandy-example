@@ -39,7 +39,7 @@ export function answerCall({videoOn, localMediaId, remoteMediaId}) {
 
 function associateAccessToken(userId, token) {
     return new Promise((resolve, reject) => {
-        phone.associateAccessToken({userId, token, resolve, reject});
+        phone.associateAccessToken({userId, token, success: resolve, error: reject});
     });
 }
 
