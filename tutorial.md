@@ -142,7 +142,7 @@ _lib/services/kandy.js_
 ```javascript
 module.exports = {
     getUserAccessToken(username) {
-        var url = `${config.kandy.apiRoot}domains/users/accesstokens`;
+        var url = `https://api.kandy.io/v1.2/domains/users/accesstokens`;
         var params = querystring.stringify({
             key: config.kandy.key,
             domain_api_secret: config.kandy.secret,
@@ -166,7 +166,7 @@ Now that we have a back-end application server we will need to build the front e
 Similar to the back-end we use modern tools to help us deliver a great experience.
 * We will be using ES6, [React](https://facebook.github.io/react/) with JSX and [CSS Modules](https://github.com/css-modules/css-modules) all backed by [webpack](https://webpack.github.io/) for module bundling and management.
 * For an easy modern look we will be using the [material-ui](http://www.material-ui.com/) React components.
-* The demo application includes a development mode that allows for (hot module replacement)[https://webpack.github.io/docs/hot-module-replacement.html] which is a must for quick iterations while developing.
+* The demo application includes a development mode that allows for [hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html) which is a must for quick iterations while developing.
 
 
 ### Application State
