@@ -178,7 +178,7 @@ Similar to the back-end we use modern tools to help us deliver a great experienc
 Although the Kandy team highly recommends [Redux](http://redux.js.org/) as a Flux implementation in this demo we have used a more lightweight Flux approach by using an event emitter as a dispatcher and [Baobab](https://github.com/Yomguithereal/baobab) as a store for the application state.
 
 Here is our simple dispatcher:
-_public/dispatcher.js_
+_app/dispatcher.js_
 ```javascript
 import Emitter from 'emmett';
 var emitter = new Emitter();
@@ -193,7 +193,7 @@ export function register(action, actionHandler) {
 ```
 
 Our state will be held fully into one Baobab tree. Here is how we initialize our state:
-_public/state.js_
+_app/state.js_
 ```javascript
 import Baobab from 'baobab';
 import ReactAddons from 'react/addons';
@@ -223,7 +223,7 @@ export default new Baobab({
 The demo application is entirely built of React components. React-Router is used to associate specific React components to URL routes.
 
 Here is how our demo application defines it's routes:
-_public/index.js_
+_app/index.js_
 ```javascript
 // Render the application
 ReactDOM.render(
@@ -251,7 +251,7 @@ Action handlers are where we add the business logic of our application. They wil
 Note that the UI will be updated based on update notifications it receives from the state.
 
 Here is an example action handler for the login to kandy action:
-_public/actions/kandyActions.js_
+_app/actions/kandyActions.js_
 ```javascript
 export function login({userAccessToken}){
 

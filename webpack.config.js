@@ -8,7 +8,7 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.join(__dirname, 'public/index.js')
+        path.join(__dirname, 'app/index.js')
     ],
     output: {
         path: path.join(__dirname, 'dist/'),
@@ -17,11 +17,11 @@ module.exports = {
     },
     externals: {
         kandy: 'kandy',
-        ATT: 'ATT'
+        att: 'ATT'
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'public/index.tpl.html'),
+            template: path.join(__dirname, 'app/index.tpl.html'),
             inject: 'body',
             filename: 'index.html'
         }),
@@ -37,7 +37,7 @@ module.exports = {
             ]},
 
             // ES6 loader using Babel
-            { test: /\.js?$/, include: path.join(__dirname, 'public'), loader: 'babel-loader' }
+            { test: /\.js?$/, include: path.join(__dirname, 'app'), loader: 'babel-loader' }
         ]
     },
 

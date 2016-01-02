@@ -3,6 +3,14 @@ html, body, #root {
     width: 100%;
 }
 
+a:link {
+    color: #ffffff
+}
+
+a:visited {
+    color: #cfcfcf
+}
+
 * {
     font-family: 'Roboto', sans-serif;
     margin: 0px;

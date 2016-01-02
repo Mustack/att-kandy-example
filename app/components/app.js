@@ -9,7 +9,9 @@ export default React.createClass({
                 <div className={styles.container}>
                     {this.props.children}
                 </div>
-                <footer className={styles.footer}>Powered by AT&amp;T and Kandy.</footer>
+                <footer className={styles.footer}>
+                    Powered by <a href="http://developer.att.com">AT&amp;T</a> and <a href="http://developer.kandy.io">Kandy</a>.
+                </footer>
             </div>
         );
     }

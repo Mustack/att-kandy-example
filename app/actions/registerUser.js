@@ -8,7 +8,7 @@ import history from '../history';
 export function registerUser(userInformation) {
 
     // Make a POST to our backend server to create an new user.
-    progress(window.fetch('/users', {
+    progress(window.fetch('/api/users', {
         method: 'POST',
         body: JSON.stringify(userInformation)
     })

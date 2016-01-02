@@ -6,5 +6,5 @@ export function dispatch(action, payload ){
 }
 
 export function register(action, actionHandler) {
-    emitter.on(action, actionHandler);
+    emitter.on(action, event => actionHandler(event.data));
 }

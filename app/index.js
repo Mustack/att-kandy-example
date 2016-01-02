@@ -14,7 +14,11 @@ import Conversation from './components/conversation';
 // Add .finally to promises
 import 'promise.prototype.finally';
 
+// Import global css
 import './index.css';
+
+// Import the action registry
+import './actionRegistry';
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release

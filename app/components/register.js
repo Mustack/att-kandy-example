@@ -28,7 +28,7 @@ export default React.createClass({
 
     register() {
         // Since the state has the full payload, just use it as is.
-        dispatch('register', this.state);
+        dispatch('registerUser', this.state);
     },
 
     /**

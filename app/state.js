@@ -1,5 +1,5 @@
 import Baobab from 'baobab';
-import ReactAddons from 'react/addons';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default new Baobab({
     user: {
@@ -20,5 +20,5 @@ export default new Baobab({
     errors: []
 }, {
     shiftReferences: true,
-    mixins: [ReactAddons.addons.PureRenderMixin]
+    mixins: [PureRenderMixin]
 });

@@ -10,7 +10,7 @@ export function login({username, password}) {
     state.select('user').merge({username, password});
 
     // Make a POST to our backend server to fetch tokens
-    return progress(window.fetch('/tokens', {
+    return progress(window.fetch('/api/tokens', {
         headers: {
             Authorization: basic(username, password)
         }
