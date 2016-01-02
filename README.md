@@ -11,6 +11,7 @@
 - Install dependencies (npm install)
 - Edit the lib/config.js file to configure your accounts.
 - Run 'npm start'
+- Point your browser to https://localhost:8080
 
 # Learning
 
