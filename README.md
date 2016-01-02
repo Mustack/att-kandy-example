@@ -14,5 +14,5 @@
 
 # Learning
 
-- Checkout the tutorial.md file to follow along.
+- Checkout the [tutorial.md](https://github.com/Kandy-IO/att-kandy-example/blob/master/tutorial.md) file to follow along.
 - Come see us at the [#atthack](https://devsummit.att.com/hackathon)
