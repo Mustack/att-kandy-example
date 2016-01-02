@@ -1,7 +1,6 @@
 import kandy from 'kandy';
 import state from '../state';
 
-
 var kandyCursor = state.select('kandy');
 var conversations = state.select('conversations');
 

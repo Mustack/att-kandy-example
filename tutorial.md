@@ -221,15 +221,13 @@ The demo application is entirely built of React components. React-Router is used
 Here is how our demo application defines it's routes:
 _app/index.js_
 ```javascript
-// Render the application
 ReactDOM.render(
     <Router history={history}>
         <Route path="/" component={App}>
             <IndexRedirect to="login"/>
             <Route path="login" component={Login} onEnter={requireNoAuth}/>
             <Route path="register" component={Register} onEnter={requireNoAuth}/>
-            <Route path="dialer" component={Dialer} onEnter={requireAuth}/>
-            <Route path="conversation" component={Conversation} onEnter={requireAuth}/>
+            <Route path="dashboard" component={Dashboard} onEnter={requireAuth}/>
             <Redirect path="*" to="login"/>
         </Route>
     </Router>
@@ -275,3 +273,19 @@ export function login({userAccessToken}){
 ```
 
 # Additional Features
+
+This demo application contains the barebones necessary to use AT&T Enhanced WebRTC and Kandy together. The exiting things you can do with these frameworks are up to you. Now that you have the account creation and login done you can easily add features such as:
+
+- Video and Voice Calls
+- Screen sharing
+- Chat Messaging
+- Group Messaging
+- Co-Browsing
+- Address Book
+- WebSocket based communications (called Sessions in Kandy).
+
+For Kandy several resources are at your disposal for implementing the collaboration features mentioned above:
+- Tutorials: [developer.kandy.io/tutorials](https://developer.kandy.io/tutorials)
+- Documentation: [developer.kandy.io/docs](https://developer.kandy.io/docs)
+
+For the AT&T Enhanced WebRTC visit [developer.att.com](https://developer.att.com) for AT&T Enhanced WebRTC documentation and features.

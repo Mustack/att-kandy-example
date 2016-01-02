@@ -35,11 +35,11 @@ function requireAuth(nextState, replaceState) {
 }
 
 /**
- * onEnter hook handler which checks if already logged in and if so, redirects to dialer state.
+ * onEnter hook handler which checks if already logged in and if so, redirects to dashboard state.
  */
 function requireNoAuth(nextState, replaceState) {
     if (state.get('user','loggedIn')) {
-        replaceState({ nextPathname: nextState.location.pathname }, '/dialer');
+        replaceState({ nextPathname: nextState.location.pathname }, '/dashboard');
     }
 }
 
