@@ -4,10 +4,6 @@ In this tutorial we will explore how to build an application that uses AT&T Enha
 
 An example application based on this tutorial is available [here](https://github.com/Kandy-IO/att-kandy-example). The application example is based on the tutorial but contains some additional details that are omitted from the tutorial for brevity.
 
-## Pre-requisites
-
--
-
 ## Developer Hosted Server
 
 To host our application and provide user management and authentication we will need a server component. We will be using Node.js with express as our backend technology stack along with AT&T and Kandy APIs for user authentication.
@@ -278,10 +274,4 @@ export function login({userAccessToken}){
 }
 ```
 
-
-
-1. Register
-1. Login
-1. Calls
-1. IM
-1. Co-Browsing
+# Additional Features

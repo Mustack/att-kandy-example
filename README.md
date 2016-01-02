@@ -1,14 +1,17 @@
 
 # Pre-requisites
 
-- Chrome
+- Latest stable version of Chrome
+- Get a Kandy account from the Kandy sponsor table.
+- Get an AT&T Enhanced WebRTC account from developer.att.com
 
 # Installing
 
-- Get Accounts
-- Install node.js (nvm)
+- Install node.js 5+ (nvm)
 - Install dependencies (npm install)
-- Configuration
+- Edit the lib/config.js file to configure your accounts.
 - Run 'npm start'
 
-# TODO
+# Learning
+
+- Checkout the tutorial.md file to follow along. 
