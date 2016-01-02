@@ -7,11 +7,12 @@
 
 # Installing
 
-- Install node.js 5+ (nvm)
+- Install node.js 5+ ([nvm recommended](https://github.com/creationix/nvm))
 - Install dependencies (npm install)
 - Edit the lib/config.js file to configure your accounts.
 - Run 'npm start'
 
 # Learning
 
-- Checkout the tutorial.md file to follow along. 
+- Checkout the tutorial.md file to follow along.
+- Come see us at the [#atthack](https://devsummit.att.com/hackathon)
